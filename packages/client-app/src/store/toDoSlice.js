@@ -20,6 +20,29 @@ export const fetchTasks = createAsyncThunk(
     }
 );
 
+export const createTask = createAsyncThunk(
+    'toDo/createTask',
+    async (obj, rejectWithValue) => {
+        try {
+            const response = await fetch('http://localhost:5000/api/toDo', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(obj)
+              });
+
+            if (response.status !== 200) {
+                throw new Error('Server Error!');
+            }
+            return await response.json();
+
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 export const fetchFilterDataTable = createAsyncThunk(
   'toDo/fetchFilterTasks',
     async (obj, rejectWithValue) => {

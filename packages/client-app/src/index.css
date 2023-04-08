@@ -23,9 +23,6 @@ code {
 .taskForm {
   display: flex;
   flex-direction: column;
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  /* width: 30%; */
 }
 
 .taskForm > * {
@@ -34,4 +31,9 @@ code {
 
 .taskList {
   margin-top: 30px;
+}
+
+.Task {
+  display: flex;
+  flex-direction: column;
 }
