@@ -9,6 +9,7 @@ import {
   Routes,
 } from 'react-router-dom';
 
+import { EditTask } from './components/EditTask';
 import { MainPage } from './components/MainPage.jsx';
 import { store } from './store';
 
@@ -18,6 +19,7 @@ function App () {
       <Provider store={store}>
         <Routes>
           <Route path='/' element={<MainPage />} />
+          <Route path='/edit/:id' element={<EditTask />} />
         </Routes>
       </Provider>
     </div>

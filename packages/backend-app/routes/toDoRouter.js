@@ -4,6 +4,6 @@ const toDoController = require('../controllers/toDoController')
 
 router.post('/', toDoController.create)
 router.get('/', toDoController.getAll)
-router.get('/:id', toDoController.getOne)
+router.get('/:id', toDoController.getTask)
 
 module.exports = router

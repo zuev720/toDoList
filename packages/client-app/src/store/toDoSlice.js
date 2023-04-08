@@ -20,6 +20,22 @@ export const fetchTasks = createAsyncThunk(
     }
 );
 
+export const fetchTask = createAsyncThunk(
+    'toDo/fetchTask',
+    async (id, rejectWithValue) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/toDo/${id}`);
+            if (response.status !== 200) {
+                throw new Error('Server Error!');
+            }
+            return await response.json();
+
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 export const createTask = createAsyncThunk(
     'toDo/createTask',
     async (obj, rejectWithValue) => {
@@ -94,6 +110,18 @@ const toDoReducer = createSlice({
             state.data = action.payload;
         },
         [fetchTasks.rejected]: (state, action) => {
+            state.error = action.payload;
+            state.status = 'rejected';
+        },
+        [fetchTask.pending]: (state) => {
+            state.status = 'loading';
+            state.error = null;
+        },
+        [fetchTask.fulfilled]: (state, action) => {
+            state.status = 'resolved';
+            state.data = action.payload;
+        },
+        [fetchTask.rejected]: (state, action) => {
             state.error = action.payload;
             state.status = 'rejected';
         },
