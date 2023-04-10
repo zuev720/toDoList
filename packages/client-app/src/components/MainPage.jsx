@@ -1,14 +1,8 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import {
-  createTask,
-  fetchTasks,
-} from '../store/toDoSlice';
+import { createTask } from '../store/toDoSlice';
 import { TaskList } from './TaskList';
 
 export const MainPage = () => {
@@ -17,10 +11,6 @@ export const MainPage = () => {
   const [userTask, setUserTask] = useState('');
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTasks());
-  }, [dispatch]);
 
   const handleUserNameChange = e => {
     setUserName(e.target.value);

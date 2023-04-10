@@ -46,3 +46,7 @@ code {
   width: 30%;
   text-align: left;
 }
+
+.deleteTask {
+  margin-left: 20px;
+}

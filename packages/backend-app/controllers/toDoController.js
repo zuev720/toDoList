@@ -18,6 +18,24 @@ class ToDoController {
       next(ApiError.badRequest(e.message));
     }
   }
+  
+  async editTask(req, res, next) {
+    try {
+      const obj = req.body;
+
+      const task = await Tasks.findOne({
+        where: Number(obj.id),
+      });
+
+      task.action = obj.action;
+      task.status = obj.status;
+      task.save();
+
+      return res.json("Task edited successfully!");
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
 
   async getAll(req, res) {
     const tasks = await Tasks.findAll();
@@ -30,6 +48,15 @@ class ToDoController {
       where: Number(id),
     });
     return res.json(task);
+  }
+  
+  async deleteTask(req, res) {
+    const { id } = req.params;
+    const task = await Tasks.findOne({
+      where: Number(id),
+    });
+    task.destroy();
+    return res.json('Task deleted successfully');
   }
 }
 

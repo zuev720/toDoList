@@ -1,14 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { fetchTasks } from '../store/toDoSlice';
 
 export const TaskList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const tasks = useSelector(state => state.data);
+
+useEffect(() => {
+  dispatch(fetchTasks());
+}, [dispatch]);
+
 
   const Task = props => {
     const status = props.status ? 'bg-success' : 'bg-primary';
     const handleTaskClick = (id) => {
-      navigate(`/edit/${id}`)
+      navigate(`/edit/${id}`);
     }
 
     return (
